@@ -1,8 +1,9 @@
-//import { Ingredient } from '@prisma/client';
+import { Ingredient } from '../../models/product';
+import { ApiRoutes } from './constants';
 import { axiosInstance } from './instance';
 
-export const getAll = async () => {
-  const { data } = await axiosInstance.get<any>('/ingredients');
+export const getAll = async (): Promise<Ingredient[]> => {
+  const { data } = await axiosInstance.get<Ingredient[]>('/ingredients');
 
   return data;
 };

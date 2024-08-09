@@ -11,30 +11,25 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useMap, useSet } from 'react-use';
 import debounce from 'lodash.debounce';
 import { Api } from '@/services/api-client';
-//import { Ingredient } from '@prisma/client';
+import { Ingredient } from './../../../models/product';
 import { FilterCheckbox } from './filter-checkbox';
+import { useFilterIngredients } from '@/hooks/use-filter-ingredients';
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
+  const {ingredients, loading} = useFilterIngredients();
+
+  const items = ingredients.map((item) => ({value: String(item.id), text: item.name}));
   const searchParams = useSearchParams();
   const router = useRouter();
   const [filters, { set }] = useMap(Object.fromEntries(searchParams.entries()));
-  const [ingredients, setIngredients] = React.useState<any>([]);
   const [selectedIngredientsIds, { toggle }] = useSet(new Set<string>());
   const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(new Set<string>());
   const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>());
 
-  React.useEffect(() => {
-    async function fetchIngredients() {
-      const data = await Api.ingredients.getAll();
-      setIngredients(data);
-    }
-
-    fetchIngredients();
-  }, []);
 
   const updateQueryParams = React.useMemo(
     () =>
@@ -74,6 +69,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         name="pizzaTypes"
         className="mb-5"
         title="Тип теста"
+        loading={loading}
         onClickCheckbox={togglePizzaTypes}
         items={[
           { text: 'Тонкое', value: '1' },
@@ -85,6 +81,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         name="sizes"
         className="mb-5"
         title="Размеры"
+        loading={loading}
         onClickCheckbox={toggleSizes}
         items={[
           { text: '20 см', value: '20' },
@@ -127,14 +124,12 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
       <CheckboxFiltersGroup
         name="ingredients"
-        //loading={ingredients.length === 0}
+        loading={loading}
         className="mt-5"
         title="Ингредиенты"
-        limit={6}
         onClickCheckbox={toggle}
-        /* defaultItems={defaultIngredients} */              
-        defaultItems={[{text: 'Сырный соус', value: '1'}, {text: 'Моцарела', value: '2'}]}
-        items={ingredients?.map((o: any) => ({ text: o.name, value: o.id.toString() })) || []}
+        defaultItems={items.slice(0, 6)}
+        items={items}
       />
     </div>
   );
