@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const {ingredients, loading} = useFilterIngredients();
+  const {ingredients, loading, onAddId, selectedIds} = useFilterIngredients();
 
   const items = ingredients.map((item) => ({value: String(item.id), text: item.name}));
   const searchParams = useSearchParams();
