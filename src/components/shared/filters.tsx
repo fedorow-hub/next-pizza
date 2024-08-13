@@ -55,7 +55,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
   const defaultIngredients = ingredients
     ?.slice(0, 6)
-    .map((o: any) => ({ text: o.name, value: o.id.toString() }));
+    .map((o: Ingredient) => ({ text: o.name, value: o.id.toString() }));
 
   return (
     <div className={className}>

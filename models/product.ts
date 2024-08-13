@@ -1,37 +1,37 @@
 
 export interface Product
 {
-    Id: number
-    Name: string
-    ImageUrl: string
-    CreatedAt: Date
-    UpdatedAt: Date
-    //Category: Category
-    CategoryId: number
-    Items: ProductItem[]
-    Ingredients: Ingredient[]
+    id: number
+    name: string
+    imageUrl: string
+    createdAt: Date
+    updatedAt: Date
+    category: Category
+    categoryId: number
+    items: ProductItem[]
+    ingredients: Ingredient[]
 }
 
-interface Category {
-    Id: number
-    Name: string
+export interface Category {
+    id: number
+    name: string
 }
 
-interface ProductItem {
-    Id: number
-    Price: number
-    Size: number
-    PizzaType: number
-    ProductId: number
-    CreatedAt: Date
-    UpdatedAt: Date
+export interface ProductItem {
+    id: number
+    price: number
+    size: number
+    pizzaType: number
+    productId: number
+    createdAt: Date
+    updatedAt: Date
 }
 
 export interface Ingredient {
-    Id: number
-    Name: string
-    ImageUrl: string
-    CreatedAt: Date
-    UpdatedAt: Date
-    Price: number
+    id: number
+    name: string
+    imageUrl: string
+    createdAt: Date
+    updatedAt: Date
+    price: number
 }
