@@ -5,16 +5,15 @@ import React from 'react';
 import { Container } from './container';
 import { Categories } from './categories';
 import { SortPopup } from './sort-popup';
-//import { Category } from '@prisma/client';
 import { CartButton } from './cart-button';
+import { Category } from '../../../models/product';
 
-interface Props {
-  /* categories: Category[]; */
-  /* categories: any;
-  className?: string; */
+interface Props {  
+  categories: Category[];
+  className?: string;
 }
 
-export const TopBar: React.FC<Props> = () => {
+export const TopBar: React.FC<Props> = ({categories, className}) => {
   const [cartVisible, setCartVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -37,7 +36,7 @@ export const TopBar: React.FC<Props> = () => {
     <div className={cn('sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10')}>
       <Container className="flex items-center justify-between ">
         {/* <Categories items={categories} /> */}
-        <Categories />
+        <Categories items={categories}/>
         <div className="flex items-center">
           <SortPopup />
           <CartButton

@@ -16,7 +16,8 @@ export { FilterCheckbox } from './filter-checkbox';
 export { Filters } from './filters';
 export { ProductCard } from './product-cart';
 export { ProductsGroupList } from './products-group-list';
-
+export { ProductImage } from './product-image';
+export { GroupVariants } from './group-variants';
 
 
 

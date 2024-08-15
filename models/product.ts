@@ -8,23 +8,21 @@ export interface Product
     updatedAt: Date
     category: Category
     categoryId: number
-    items: ProductItem[]
+    productItems: ProductItem[]
     ingredients: Ingredient[]
 }
 
 export interface Category {
     id: number
     name: string
+    products: Product[]
 }
 
-export interface ProductItem {
-    id: number
+export interface ProductItem {    
     price: number
     size: number
     pizzaType: number
     productId: number
-    createdAt: Date
-    updatedAt: Date
 }
 
 export interface Ingredient {

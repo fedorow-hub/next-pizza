@@ -6,13 +6,11 @@ import { ProductCard } from './product-cart';
 import { cn } from '@/lib/utils';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store/category';
-import { Product } from '../../../models/product';
-//import { CategoryProducts } from '@/@types/prisma';
+import { Product, ProductItem } from '../../../models/product';
 
 interface Props {
   title: string;
-  /* products: CategoryProducts['products']; */
-  products: Product[];
+  items: Product[];
   className?: string;
   listClassName?: string;
   categoryId: number;
@@ -20,7 +18,7 @@ interface Props {
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
-  products,
+  items,
   listClassName,
   categoryId,
   className,
@@ -41,15 +39,15 @@ export const ProductsGroupList: React.FC<Props> = ({
     <div className={className} id={title}>
       <Title text={title} size="lg" className="font-extrabold mb-5" />
       <div ref={intersectionRef} className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
-        {products
-          .filter((product: Product) => product.items.length > 0)
+        {items
+          .filter((product: Product) => product.productItems?.length > 0)
           .map((product: Product, i: any) => (
             <ProductCard
-              key={product.id}
+              key={i}
               id={product.id}
               name={product.name}
               imageUrl={product.imageUrl}
-              price={product.items[0].price}
+              price={product.productItems[0].price}
             />
           ))}
       </div>
