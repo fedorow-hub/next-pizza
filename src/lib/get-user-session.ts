@@ -1,4 +1,4 @@
-import { authOptions } from '@/app/api/[...nextauth]/route';
+/* import { authOptions } from '@/app/api/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
 export const getUserSession = async () => {
@@ -6,3 +6,4 @@ export const getUserSession = async () => {
 
   return session?.user ?? null;
 };
+ */

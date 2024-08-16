@@ -1,19 +1,7 @@
 'use server';
 
-import { TFormOrderData } from '@/components/shared/schemas/order-form-shema';
-import { getUserSession } from '@/lib/get-user-session';
-import { prisma } from '@/lib/prisma';
-import { sendEmail } from '@/lib/send-email';
-//import { OrderStatus, Prisma } from '@prisma/client';
-import { hashSync } from 'bcrypt';
-import { cookies } from 'next/headers';
-import { createPayment } from '@/lib/create-payment';
-import { CreateUserFormValues } from '@/components/shared/dashboard/forms/create-user-form/constants';
-import { revalidatePath } from 'next/cache';
-
-export async function registerUser(body: any /* Prisma.UserCreateInput */) {
-  try {
-    const user = await prisma.user.findFirst({
+//import { TFormOrderData } from '@/components/shared/schemas/order-form-shema';
+    /* const user = await prisma.user.findFirst({
       where: {
         email: body.email,
       },
@@ -51,16 +39,16 @@ export async function registerUser(body: any /* Prisma.UserCreateInput */) {
     <p><a href="http://localhost:3000/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
     `;
 
-    await sendEmail(createdUser.email, 'Next Pizza / Подтверждение регистрации', html);
-  } catch (error) {
+    await sendEmail(createdUser.email, 'Next Pizza / Подтверждение регистрации', html); */
+  /* } catch (error) {
     console.log('Error [CREATE_USER]', error);
     throw error;
   }
-}
+} */
 
-export async function updateUserInfo(body: any /* Prisma.UserCreateInput */) {
-  try {
-    const currentUser = await getUserSession();
+//export async function updateUserInfo(body: any /* Prisma.UserCreateInput */) {
+  //try {
+    /* const currentUser = await getUserSession();
 
     if (!currentUser) {
       throw new Error('Пользователь не найден');
@@ -68,24 +56,24 @@ export async function updateUserInfo(body: any /* Prisma.UserCreateInput */) {
 
     await prisma.user.update({
       where: {
-        /* id: Number(currentUser.id),   */  
+        
         id: Number(3),      
       },
       data: {
         ...body,
         password: hashSync(body.password, 10),
       },
-    });
-  } catch (error) {
+    }); */
+  /* } catch (error) {
     console.log('Error [UPDATE_USER]', error);
     throw error;
   }
-}
+} */
 
-export async function createOrder(data: TFormOrderData) {
-  try {
-    const currentUser = await getUserSession();
-    /* const userId = Number(currentUser?.id); */
+/* export async function createOrder(data: TFormOrderData) {
+  try { */
+    /* const currentUser = await getUserSession();
+    const userId = Number(currentUser?.id);
     const userId = Number(3);
     const cookieStore = cookies();
     const cartToken = cookieStore.get('cartToken')?.value;
@@ -133,7 +121,7 @@ export async function createOrder(data: TFormOrderData) {
         address: data.address,
         comment: data.comment,
         totalAmount: userCart.totalAmount,
-        /* status: OrderStatus.PENDING, */
+        status: OrderStatus.PENDING,
         status,
         items: JSON.stringify(userCart.items),
       },
@@ -181,16 +169,16 @@ export async function createOrder(data: TFormOrderData) {
       await sendEmail(userCart.user?.email, `Next Pizza / Оплатите заказ #${order?.id}`, html);
     }
 
-    return paymentData.confirmation.confirmation_url;
-  } catch (error) {
+    return paymentData.confirmation.confirmation_url; */
+ /*  } catch (error) {
     console.log('[CART_CHECKOUT_POST] Server error', error);
     throw error;
   }
-}
+} */
 
 /* Dashboard Actions */
 
-export async function updateUser(id: number, data: any /* Prisma.UserUpdateInput */) {
+/* export async function updateUser(id: number, data: any Prisma.UserUpdateInput) {
   try {
     await prisma.user.update({
       where: {
@@ -208,7 +196,7 @@ export async function updateUser(id: number, data: any /* Prisma.UserUpdateInput
   }
 }
 
-export async function createUser(data: any /* Prisma.UserCreateInput */) {
+export async function createUser(data: any Prisma.UserCreateInput) {
   try {
     await prisma.user.create({
       data: {
@@ -234,7 +222,7 @@ export async function deleteUser(id: number) {
   revalidatePath('/dashboard/users');
 }
 
-export async function updateCategory(id: number, data: any /* Prisma.CategoryUpdateInput */) {
+export async function updateCategory(id: number, data: any Prisma.CategoryUpdateInput) {
   try {
     await prisma.category.update({
       where: {
@@ -248,7 +236,7 @@ export async function updateCategory(id: number, data: any /* Prisma.CategoryUpd
   }
 }
 
-export async function createCategory(data: any /* Prisma.CategoryCreateInput */) {
+export async function createCategory(data: any Prisma.CategoryCreateInput) {
   try {
     await prisma.category.create({
       data,
@@ -271,7 +259,7 @@ export async function deleteCategory(id: number) {
   revalidatePath('/dashboard/categories');
 }
 
-export async function updateProduct(id: number, data: any /* Prisma.ProductUpdateInput */) {
+export async function updateProduct(id: number, data: any Prisma.ProductUpdateInput) {
   try {
     await prisma.product.update({
       where: {
@@ -285,7 +273,7 @@ export async function updateProduct(id: number, data: any /* Prisma.ProductUpdat
   }
 }
 
-export async function createProduct(data: any /* Prisma.ProductCreateInput */) {
+export async function createProduct(data: any Prisma.ProductCreateInput) {
   try {
     await prisma.product.create({
       data,
@@ -308,7 +296,7 @@ export async function deleteProduct(id: number) {
   revalidatePath('/dashboard/products');
 }
 
-export async function updateIngredient(id: number, data: any/* Prisma.IngredientUpdateInput */) {
+export async function updateIngredient(id: number, data: anyPrisma.IngredientUpdateInput) {
   try {
     await prisma.ingredient.update({
       where: {
@@ -322,7 +310,7 @@ export async function updateIngredient(id: number, data: any/* Prisma.Ingredient
   }
 }
 
-export async function createIngredient(data: any /* Prisma.IngredientCreateInput */) {
+export async function createIngredient(data: any Prisma.IngredientCreateInput) {
   try {
     await prisma.ingredient.create({
       data: {
@@ -354,7 +342,7 @@ export async function deleteIngredient(id: number) {
   }
 }
 
-export async function updateProductItem(id: number, data: any /* Prisma.ProductItemUpdateInput */) {
+export async function updateProductItem(id: number, data: any Prisma.ProductItemUpdateInput) {
   try {
     await prisma.productItem.update({
       where: {
@@ -368,7 +356,7 @@ export async function updateProductItem(id: number, data: any /* Prisma.ProductI
   }
 }
 
-export async function createProductItem(data: any /* Prisma.ProductItemUncheckedCreateInput */) {
+export async function createProductItem(data: any Prisma.ProductItemUncheckedCreateInput) {
   try {
     await prisma.productItem.create({
       data: {
@@ -400,3 +388,4 @@ export async function deleteProductItem(id: number) {
     throw error;
   }
 }
+ */

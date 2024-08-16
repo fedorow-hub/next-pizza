@@ -1,8 +1,8 @@
 //import { User } from '@prisma/client';
-import { axiosInstance } from './instance';
+/* import { axiosInstance } from './instance';
 
 export const getMe = async () => {
   const { data } = await axiosInstance.get<any>('/auth/me');
 
   return data;
-};
+}; */

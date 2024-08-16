@@ -5,14 +5,17 @@ import { useProduct } from "@/hooks/use-product";
 import { notFound } from "next/navigation";
 
 export default function ProductPage({params: {id}}: {params: {id: string}}) {
-    const {product, loading} = useProduct(Number(id));
+    //const {product, loading} = useProduct(Number(id));
 
-    if(!loading && !product){
+    /* if(!loading && !product){
         return notFound();
-    }
+    } */
+
+    return <div>Страница</div>
     
     return <Container className="flex flex-col my-10">
-        <div className="flex flex-1">
+        <div>Страница</div>
+        {/* <div className="flex flex-1">
             <ProductImage imageUrl={product?.imageUrl} size={40} className=""/>
             <div className="w-[490px] bg-[#F7F6F5] p-7">
                 <Title text={product?.name} size="md" className="font-extrabold mb-1"/>
@@ -35,7 +38,7 @@ export default function ProductPage({params: {id}}: {params: {id: string}}) {
                         },
                     ]}/>
             </div>
-        </div>
+        </div> */}
     </Container>
 
 }

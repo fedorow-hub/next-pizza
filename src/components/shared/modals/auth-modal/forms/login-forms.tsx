@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { FormInput } from '@/components/shared/form';
-import { signIn } from 'next-auth/react';
+//import { signIn } from 'next-auth/react';
 import { revalidatePath } from 'next/cache';
 
 interface Props {
@@ -24,7 +24,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 
   const onSubmit = async (data: TFormLoginData) => {
     try {
-      const resp = await signIn('credentials', {
+      /* const resp = await signIn('credentials', {
         ...data,
         redirect: false,
       });
@@ -33,7 +33,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         return toast.error('Неверный E-Mail или пароль', {
           icon: '❌',
         });
-      }
+      } */
 
       onClose?.();
     } catch (error) {

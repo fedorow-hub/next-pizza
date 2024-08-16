@@ -8,8 +8,6 @@ import { useCategories} from '@/hooks';
 export default function Home() {
   const {categories, loading} = useCategories();
   
-  
-
   return <>
     <Container className="mt-10">
       <Title text="Все пиццы" size="lg" className="font-extrabold"/>      
@@ -24,7 +22,7 @@ export default function Home() {
           <Filters/>
         </div>
         <div className="flex-1">
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-16">          
             {
               categories.map((category) => (
                 category.products.length > 0 && (

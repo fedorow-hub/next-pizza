@@ -6,7 +6,7 @@ import { ProductCard } from './product-cart';
 import { cn } from '@/lib/utils';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store/category';
-import { Product, ProductItem } from '../../../models/product';
+import { Product } from '../../../models/product';
 
 interface Props {
   title: string;
