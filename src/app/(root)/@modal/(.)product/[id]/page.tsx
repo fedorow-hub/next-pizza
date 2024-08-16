@@ -1,37 +1,30 @@
+'use client'
+
 import { ChooseProductModal } from '@/components/shared/modals/choose-product-modal';
-//import { prisma } from '@/lib/prisma';
+import { useProduct } from '@/hooks/use-product';
 import { notFound } from 'next/navigation';
 
-/* export default async function ProductModalPage({ params: { id } }: { params: { id: string } }) {
-  const product = await prisma.product.findFirst({
-    where: {
-      id: Number(id),
-    },
-    include: {
-      ingredients: true,
-      items: {
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          product: {
-            include: {
-              items: true,
-            },
-          },
-        },
-      },
-    },
-  });
+export default function ProductModalPage({ params: { id } }: { params: { id: string } }) {  
+  console.log(id)
+  const {product, loading} = useProduct(Number(id));
+  
+  /* if(product)
+    console.log(product) */
 
-  if (!product) {
+  if(!loading && !product){
     return notFound();
   }
 
-  return <ChooseProductModal product={product} />;
-} */
+  if(product)
+    return <ChooseProductModal product={product} />;
+  return <></>
+}
 
-  export default function ProductModalPage() {
+ /*  export default function ProductModalPage({ params: { id } }: { params: { id: string } }) {
+    const {product, loading} = useProduct(Number(id));
+
+    if(!loading)
+      console.log(product)
     
     return <h1>модалка</h1>;
-  }
+  } */

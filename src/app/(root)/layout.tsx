@@ -1,6 +1,5 @@
+import { Header } from "@/components/shared";
 import type { Metadata } from "next";
-import { Providers } from './../providers';
-import { Header } from "@/components/shared/header";
 
 export const metadata: Metadata = {
   title: "Next Pizza", 
@@ -17,9 +16,9 @@ export default function HomeLayout({
   return (    
       <div> {/* Providers */}
         <main className="min-h-screen">
-          {/* <Header></Header> */}
-          <div>{children}</div>
-          <div>{modal}</div>
+          <Header></Header>
+            <div>{children}</div>
+            <div>{modal}</div>
         </main> 
       </div>
   );

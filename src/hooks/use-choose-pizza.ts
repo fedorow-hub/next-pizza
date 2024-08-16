@@ -1,7 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useSet } from 'react-use';
-//import { Ingredient, Product, ProductItem } from '@prisma/client';
+import { Ingredient, Product, ProductItem } from './../../models/product';
 
 import {
   PizzaSize,
@@ -12,9 +12,9 @@ import {
 } from '@/lib/pizza-details-to-text';
 import { useCart } from './use-cart';
 
-/* export type IProduct = Product & { items: ProductItem[]; ingredients: Ingredient[] }; */
+export type IProduct = Product & { items: ProductItem[]; ingredients: Ingredient[] };
 
-export type IProduct = any & { items: any[]; ingredients: any[] };
+//export type IProduct = any & { items: any[]; ingredients: any[] };
 
 export const useChoosePizza = (items?: IProduct['items']) => {
   const [selectedIngredientsIds, { toggle: toggleAddIngredient }] = useSet<number>(new Set([]));

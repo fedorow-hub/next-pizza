@@ -19,6 +19,7 @@ export interface Category {
 }
 
 export interface ProductItem {    
+    id: number
     price: number
     size: number
     pizzaType: number
