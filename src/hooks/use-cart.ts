@@ -1,11 +1,12 @@
-//import debounce from 'lodash.debounce';
-import { ICartItem, useCartStore } from '@/store/cart';
+import debounce from 'lodash.debounce';
+import { useCartStore } from '@/store/cart';
 import React from 'react';
 import { CreateCartItemValues } from '@/services/dto/cart';
+import { CartStateItem } from '@/lib/get-cart-details';
 
 type ReturnProps = {
   totalAmount: number;
-  items: ICartItem[];
+  items: CartStateItem[];
   loading: boolean;
   updateItemQuantity: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;
@@ -27,7 +28,7 @@ export const useCart = (runFetch?: boolean): ReturnProps => {
     state.fetchCartItems,
     state.loading,
     state.addCartItem,
-    /* debounce(state.updateItemQuantity, 200), */
+    //debounce(state.updateItemQuantity, 200),
     state.updateItemQuantity,
     state.removeCartItem,
   ]);
@@ -43,7 +44,7 @@ export const useCart = (runFetch?: boolean): ReturnProps => {
     items,
     loading,
     addCartItem,
-    updateItemQuantity,   
-    removeCartItem,
+    updateItemQuantity,
+    removeCartItem
   };
 };

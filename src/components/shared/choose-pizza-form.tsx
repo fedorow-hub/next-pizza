@@ -8,7 +8,6 @@ import { Button } from '../ui/button';
 import { Title } from './title';
 import { PizzaSelector } from './pizza-selector';
 import { IProduct, useChoosePizza } from '@/hooks/use-choose-pizza';
-import { useSet } from 'react-use';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -33,7 +32,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     type,
     availablePizzaSizes,
     setPizzaSize,
-    setPizzaType,
+    setPizzaType, 
     textDetaills,
     loading,
     addPizza,
@@ -43,10 +42,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
   const totalIngredientPrice: number =
     ingredients
-      ?.filter((ingredient: any) => selectedIngredientsIds.has(ingredient.id))
-      ?.reduce((acc: any, item: any) => acc + item.price, 0) || 0;
+      ?.filter((ingredient) => selectedIngredientsIds.has(ingredient.id))
+      ?.reduce((acc, item) => acc + item.price, 0) || 0;
 
-  const pizzaPrice: number = items?.find((item: any) => item.pizzaType === type)?.price || 0;
+  const pizzaPrice: number = items?.find((item) => item.pizzaType === type && item.size === size)?.price || 0;
   const totalPrice: number = totalIngredientPrice + pizzaPrice;
 
   const handleClickAdd = async () => {
@@ -76,7 +75,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           onClickPizzaType={setPizzaType}
         />
 
-        <div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar">
+        <div className="bg-gray-50 p-5 mb-5 rounded-md h-[420px] overflow-auto scrollbar">
           <IngredientsList
             ingredients={ingredients}
             onClickAdd={toggleAddIngredient}

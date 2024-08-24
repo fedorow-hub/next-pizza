@@ -14,8 +14,6 @@ import { useCart } from './use-cart';
 
 export type IProduct = Product & { items: ProductItem[]; ingredients: Ingredient[] };
 
-//export type IProduct = any & { items: any[]; ingredients: any[] };
-
 export const useChoosePizza = (items?: IProduct['items']) => {
   const [selectedIngredientsIds, { toggle: toggleAddIngredient }] = useSet<number>(new Set([]));
   const { addCartItem, loading } = useCart();

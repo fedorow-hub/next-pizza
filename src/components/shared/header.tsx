@@ -8,7 +8,7 @@ import { SearchInput } from './search-input';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { CartButton } from './cart-button';
-//import { AuthModal } from './modals/auth-modal';
+import { AuthModal } from './modals/auth-modal';
 import { ProfileButton } from './profile-button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -69,7 +69,7 @@ export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart =
         )}
 
         <div className="flex items-center gap-3">
-          {/* <AuthModal open={openAuthModal} onClose={onClickOpenAuthModal} /> */}
+          <AuthModal open={openAuthModal} onClose={onClickOpenAuthModal} />
 
           <ProfileButton onClickOpenModal={onClickOpenAuthModal} />
 

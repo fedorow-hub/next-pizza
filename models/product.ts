@@ -23,7 +23,7 @@ export interface ProductItem {
     price: number
     size: number
     pizzaType: number
-    productId: number
+    product: Product   
 }
 
 export interface Ingredient {

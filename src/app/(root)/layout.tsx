@@ -1,5 +1,6 @@
 import { Header } from "@/components/shared";
 import type { Metadata } from "next";
+import { Providers } from "../providers";
 
 export const metadata: Metadata = {
   title: "Next Pizza", 
@@ -14,12 +15,12 @@ export default function HomeLayout({
   modal: React.ReactNode;
 }>) {
   return (    
-      <div> {/* Providers */}
+      <Providers>
         <main className="min-h-screen">
           <Header></Header>
             <div>{children}</div>
             <div>{modal}</div>
         </main> 
-      </div>
+      </Providers>
   );
 }

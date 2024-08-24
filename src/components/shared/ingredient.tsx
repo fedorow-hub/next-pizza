@@ -11,7 +11,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export const Ingredient: React.FC<Props> = ({
+export const IngredientItem: React.FC<Props> = ({
   className,
   active,
   price,

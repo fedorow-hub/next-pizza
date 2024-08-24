@@ -2,25 +2,14 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 import debounce from 'lodash.debounce';
 import { CountButton } from './count-button';
-import { CartItemDetailsImage } from './cart-item-details/cart-item-details-image';
-import { CartItemInfo } from './cart-item-details/cart-item-info';
-import { CartItemDetailsPrice } from './cart-item-details/cart-item-details-price';
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
-import { ICartItem } from '@/store/cart';
+import { CartState } from '@/store/cart';
 import { Trash2Icon } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
+import * as CartItem from './cart-item-details';
 
-interface Props extends CartItemProps {
-  id: number;
-  ingredients?: ICartItem['ingredients'];
-  pizzaSize?: number | null;
-  type?: number | null;
-
-  imageUrl: any;
-  name: any;
-  price: any;
-  quantity: any;
-  //className: any;
+interface Props extends CartItemProps {  
+  className?: string;
 }
 
 export const DrawerCartItem: React.FC<Props> = ({
@@ -28,11 +17,9 @@ export const DrawerCartItem: React.FC<Props> = ({
   imageUrl,
   name,
   price,
-  ingredients,
-  pizzaSize,
-  type,
   quantity,
-  //className,
+  details,
+  className,
 }) => {
   const { updateItemQuantity, removeCartItem } = useCart();
 
@@ -41,11 +28,11 @@ export const DrawerCartItem: React.FC<Props> = ({
   };
 
   return (
-    <div className={cn('flex bg-white p-5 gap-6'/* , className */)}>
-      <CartItemDetailsImage src={imageUrl} />
+    <div className={cn('flex bg-white p-5 gap-6', className)}>
+      <CartItem.CartItemDetailsImage src={imageUrl} />
 
       <div className="flex-1">
-        <CartItemInfo name={name} ingredients={ingredients} pizzaSize={pizzaSize} type={type} />
+        <CartItem.CartItemInfo name={name} details={details} />
 
         <hr className="my-3" />
 
@@ -53,7 +40,7 @@ export const DrawerCartItem: React.FC<Props> = ({
           <CountButton onClick={onClickCountButton} value={quantity} />
 
           <div className="flex items-center gap-3">
-            <CartItemDetailsPrice value={price} />
+            <CartItem.CartItemDetailsPrice value={price} />
             <Trash2Icon
               onClick={() => removeCartItem(id)}
               className="text-gray-400 cursor-pointer hover:text-gray-600"

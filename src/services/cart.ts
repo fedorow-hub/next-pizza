@@ -1,5 +1,4 @@
-//import { Cart } from '@prisma/client';
-/* import { axiosInstance } from './instance';
+import { axiosInstance } from './instance';
 import { CartResponse, CreateCartItemValues } from './dto/cart';
 
 type AddCartItemResponseDTO = { success: boolean; cart: any };
@@ -26,4 +25,4 @@ export const removeCartItem = async (id: number): Promise<CartResponse> => {
   const { data } = await axiosInstance.delete<CartResponse>('/cart/' + id);
 
   return data;
-}; */
+};

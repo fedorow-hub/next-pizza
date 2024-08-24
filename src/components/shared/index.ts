@@ -1,6 +1,6 @@
 
-import { TopBar } from './top-bar';
-import { SortPopup } from './sort-popup';
+/* import { TopBar } from './top-bar';
+import { SortPopup } from './sort-popup'; */
 export { Container } from './container';
 export { CartButton } from './cart-button';
 export { CartDrawer } from './cart-drawer';
@@ -18,6 +18,10 @@ export { ProductCard } from './product-cart';
 export { ProductsGroupList } from './products-group-list';
 export { ProductImage } from './product-image';
 export { GroupVariants } from './group-variants';
+export { ChoosePizzaForm } from './choose-pizza-form';
+export { ChooseProductForm } from './choose-product-form';
+export { IngredientItem } from './ingredient';
+export * from './modals';
 
 
 

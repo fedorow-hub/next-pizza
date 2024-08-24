@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { ChoosePizzaForm } from '../choose-pizza-form';
-import { IProduct } from '@/hooks/use-choose-pizza';
+import { ChoosePizzaForm, ChooseProductForm } from './../';
 import { useRouter } from 'next/navigation';
-import { ChooseProductForm } from '../choose-product-form';
 import { Product } from '../../../../models/product';
 
 interface Props {
@@ -14,7 +12,6 @@ interface Props {
 
 export const ChooseProductModal: React.FC<Props> = ({ product }) => {
   const router = useRouter();
-  console.log(product)
   const isPizzaForm = Boolean(product.productItems[0].pizzaType);
 
   const onCloseModal = () => {

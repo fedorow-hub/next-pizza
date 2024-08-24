@@ -1,17 +1,20 @@
-//import { Ingredient, ProductItem } from '@prisma/client';
+import { Ingredient, ProductItem } from './../../models/product';
 
 type Item = {
-  /* productItem: ProductItem;
-  ingredients: Ingredient[]; */
-  productItem: any;
-  ingredients: any;
+  productItem: ProductItem;
+  ingredients: Ingredient[];
   quantity: number;
 };
 
+/**
+ * Функция для подсчета общей стоимости выбранного типа продукта с дополнительными ингредиентами
+ * @param item ProductItem, включающий в себя разновидность продукта и дополнительных ингредиентов
+ * @returns общая стоимость продукта с доп.ингредиентами
+ */
 export const calcCartItemTotalAmount = (item: Item): number => {
   return (
     (item.productItem.price +
-      item.ingredients.reduce((acc: any, ingredient: any) => acc + ingredient.price, 0)) *
+      item.ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0)) *
     item.quantity
   );
 };

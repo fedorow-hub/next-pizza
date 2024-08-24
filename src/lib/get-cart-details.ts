@@ -1,21 +1,34 @@
 import { CartResponse } from '@/services/dto/cart';
 import { calcCartItemTotalAmount } from './calc-cart-item-total-amount';
-import { ICartItem } from '@/store/cart';
+import { CartItem } from '../../models/cart';
+
+export type CartStateItem = {
+  id: number;
+  quantity: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  size?: number | null;
+  pizzaType?: number | null;
+  ingredients: Array<{ name: string; price: number }>;
+};
 
 type ReturnProps = {
-  items: ICartItem[];
+  items: CartStateItem[];
   totalAmount: number;
 };
 
-export const getCartDetails = (data: CartResponse): ReturnProps => {
-  const items = data.items.map((item: any) => ({
+//TODO снабдить все функции комментариями
+export const getCartDetails = (data: CartResponse): ReturnProps => { 
+  console.log(data)
+  const items = data.cartItems.map((item: CartItem) => ({
     id: item.id,
     quantity: item.quantity,
     name: item.productItem.product.name,
     imageUrl: item.productItem.product.imageUrl,
     price: calcCartItemTotalAmount(item),
-    pizzaSize: item.pizzaSize,
-    type: item.type,
+    size: item.productItem.size,
+    pizzaType: item.productItem.pizzaType,
     ingredients: item.ingredients.map((ingredient: any) => ({
       name: ingredient.name,
       price: ingredient.price,

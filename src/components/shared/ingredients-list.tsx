@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 //import { Ingredient as IIngredient } from '@prisma/client';
-import { Ingredient } from './ingredient';
+import { IngredientItem } from './ingredient';
 
 interface Props {
   onClickAdd: (id: number) => void;
@@ -20,7 +20,7 @@ export const IngredientsList: React.FC<Props> = ({
   return (
     <div className={cn('grid grid-cols-3 gap-3', className)}>
       {ingredients.map((item : any) => (
-        <Ingredient
+        <IngredientItem
           onClick={() => onClickAdd(item.id)}
           key={item.id}
           name={item.name}

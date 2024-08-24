@@ -18,11 +18,17 @@ import { Title } from './title';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useCart } from '@/hooks/use-cart';
+import { getCartItemsDetails } from '@/lib';
+import { PizzaSize, PizzaType } from '@/lib/pizza-details-to-text';
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [redirecting, setRedirecting] = React.useState(false);
 
   const { totalAmount, items, loading } = useCart(true);
+
+  
+
+  console.log(items)
 
   return (
     <Sheet>
@@ -56,7 +62,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
           {totalAmount > 0 && (
             <>
-              <div className="-mx-6 mt-5 overflow-auto flex-1">
+              <div className="-mx-6 mt-5 overflow-auto flex-1">                
                 {items.map((item) => (
                   <div key={item.id} className="mb-2">
                     <DrawerCartItem
@@ -64,11 +70,12 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                       name={item.name}
                       imageUrl={item.imageUrl}
                       price={item.price}
-                      ingredients={item.ingredients}
+                      details={
+                        item.size && item.pizzaType
+                        ? getCartItemsDetails(item.ingredients, item.pizzaType as PizzaType, item.size as PizzaSize) 
+                        : ''}
                       quantity={item.quantity}
-                      pizzaSize={item.pizzaSize}
-                      type={item.type}
-                    />
+                    />                    
                   </div>
                 ))}
               </div>
