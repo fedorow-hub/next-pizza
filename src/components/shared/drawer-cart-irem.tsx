@@ -1,31 +1,26 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
-import debounce from 'lodash.debounce';
 import { CountButton } from './count-button';
 import { CartItemProps } from './cart-item-details/cart-item-details.types';
-import { CartState } from '@/store/cart';
 import { Trash2Icon } from 'lucide-react';
-import { useCart } from '@/hooks/use-cart';
 import * as CartItem from './cart-item-details';
 
 interface Props extends CartItemProps {  
+  onClickCountButton?: (type: 'plus' | 'minus') => void;
+  onClickRemove?: () => void;
   className?: string;
 }
 
 export const DrawerCartItem: React.FC<Props> = ({
-  id,
   imageUrl,
   name,
   price,
   quantity,
   details,
+  onClickCountButton,
+  onClickRemove,
   className,
 }) => {
-  const { updateItemQuantity, removeCartItem } = useCart();
-
-  const onClickCountButton = (type: 'plus' | 'minus') => {
-    updateItemQuantity(id, type === 'plus' ? quantity + 1 : quantity - 1);
-  };
 
   return (
     <div className={cn('flex bg-white p-5 gap-6', className)}>
@@ -42,7 +37,7 @@ export const DrawerCartItem: React.FC<Props> = ({
           <div className="flex items-center gap-3">
             <CartItem.CartItemDetailsPrice value={price} />
             <Trash2Icon
-              onClick={() => removeCartItem(id)}
+              onClick={onClickRemove}
               className="text-gray-400 cursor-pointer hover:text-gray-600"
               size={16}
             />

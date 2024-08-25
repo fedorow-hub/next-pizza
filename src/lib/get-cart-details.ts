@@ -20,7 +20,6 @@ type ReturnProps = {
 
 //TODO снабдить все функции комментариями
 export const getCartDetails = (data: CartResponse): ReturnProps => { 
-  console.log(data)
   const items = data.cartItems.map((item: CartItem) => ({
     id: item.id,
     quantity: item.quantity,

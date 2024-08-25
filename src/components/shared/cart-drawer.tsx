@@ -24,11 +24,11 @@ import { PizzaSize, PizzaType } from '@/lib/pizza-details-to-text';
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [redirecting, setRedirecting] = React.useState(false);
 
-  const { totalAmount, items, loading } = useCart(true);
+  const { totalAmount, items, loading, updateItemQuantity, removeCartItem } = useCart(true);
 
-  
-
-  console.log(items)
+  const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    updateItemQuantity(id, type === 'plus' ? quantity + 1 : quantity - 1);
+  };
 
   return (
     <Sheet>
@@ -75,6 +75,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                         ? getCartItemsDetails(item.ingredients, item.pizzaType as PizzaType, item.size as PizzaSize) 
                         : ''}
                       quantity={item.quantity}
+                      onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+                      onClickRemove={() => removeCartItem(item.id)}
                     />                    
                   </div>
                 ))}
