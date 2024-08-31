@@ -42,15 +42,12 @@ export const useChoosePizza = (items?: IProduct['items']) => {
     }
   }, [type]);
 
-  const addPizza = async () => {
+  const addPizza = async () => {    
     if (productItem) {
       try {
         await addCartItem({
           productItemId: productItem?.id,
-          pizzaSize: size,
-          type,
-          ingredientsIds: Array.from(selectedIngredientsIds),
-          quantity: 1,
+          ingredientsIds: Array.from(selectedIngredientsIds)
         });
         toast.success('Товар добавлен в корзину');
       } catch (error) {

@@ -37,8 +37,7 @@ export const ChooseProductForm: React.FC<Props> = ({
   const handleClickAdd = async () => {
     try {
       await addCartItem({
-        productItemId: productItem.id,
-        quantity: 1,
+        productItemId: productItem.id
       });
       toast.success('Товар добавлен в корзину');
     } catch (error) {
