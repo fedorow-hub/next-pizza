@@ -17,7 +17,7 @@ import React from 'react';
 import { Title } from './title';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useCart } from '@/hooks/use-cart';
+import { useCart } from '@/hooks';
 import { getCartItemsDetails } from '@/lib';
 import { PizzaSize, PizzaType } from '@/lib/pizza-details-to-text';
 
@@ -72,9 +72,11 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                       price={item.price}
                       disabled={item.disabled}
                       details={
-                        item.size && item.pizzaType
-                        ? getCartItemsDetails(item.ingredients, item.pizzaType as PizzaType, item.size as PizzaSize) 
-                        : ''}
+                        getCartItemsDetails(
+                          item.ingredients, 
+                          item.pizzaType as PizzaType, 
+                          item.size as PizzaSize)
+                        }
                       quantity={item.quantity}
                       onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
                       onClickRemove={() => removeCartItem(item.id)}
@@ -94,7 +96,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                     <span className="font-bold text-lg">{totalAmount} ₽</span>
                   </div>
 
-                  <Link href="/cart">
+                  <Link href="/checkout">
                     <Button
                       onClick={() => setRedirecting(true)}
                       loading={loading || redirecting}

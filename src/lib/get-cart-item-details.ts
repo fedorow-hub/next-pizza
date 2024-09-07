@@ -4,8 +4,8 @@ import { mapPizzaType, PizzaSize, PizzaType } from "./pizza-details-to-text";
 
 export const getCartItemsDetails = (    
     ingredients: CartStateItem['ingredients'],
-    pizzaType: PizzaType,
-    pizzaSize: PizzaSize
+    pizzaType?: PizzaType,
+    pizzaSize?: PizzaSize
 ) : string => {
     const details = [];
 

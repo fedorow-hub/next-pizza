@@ -1,7 +1,9 @@
+
 import { X } from 'lucide-react';
 import React from 'react';
 
 interface Props {
+  className?: string;
   onClick?: VoidFunction;
 }
 

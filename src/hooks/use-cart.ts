@@ -14,37 +14,13 @@ type ReturnProps = {
 };
 
 export const useCart = (runFetch?: boolean): ReturnProps => {
-  const [
-    totalAmount,
-    items,
-    fetchCartItems,
-    loading,
-    addCartItem,
-    updateItemQuantity,
-    removeCartItem,
-  ] = useCartStore((state) => [
-    state.totalAmount,
-    state.items,
-    state.fetchCartItems,
-    state.loading,
-    state.addCartItem,
-    //debounce(state.updateItemQuantity, 200),
-    state.updateItemQuantity,
-    state.removeCartItem,
-  ]);
+  const cartState = useCartStore((state) => state);
 
   React.useEffect(() => {
     if (runFetch) {
-      fetchCartItems();
+      cartState.fetchCartItems();
     }
   }, []);
 
-  return {
-    totalAmount,
-    items,
-    loading,
-    addCartItem,
-    updateItemQuantity,
-    removeCartItem
-  };
+  return cartState;
 };

@@ -1,6 +1,3 @@
-
-/* import { TopBar } from './top-bar';
-import { SortPopup } from './sort-popup'; */
 export { Container } from './container';
 export { CartButton } from './cart-button';
 export { CartDrawer } from './cart-drawer';
@@ -22,7 +19,17 @@ export { ChoosePizzaForm } from './choose-pizza-form';
 export { ChooseProductForm } from './choose-product-form';
 export { IngredientItem } from './ingredient';
 export { ProductForm } from './product-form';
+export { WhiteBlock } from './white-block';
+export { CheckoutSidebar } from './checkout-sidebar';
+export { CheckoutItem } from './checkout-item';
+export { ChecoutItemDetails } from './checkout-item-details';
+export { CheckoutItemSkeleton } from './skeletons/checkout-item-skeleton';
+export { ErrorText } from './error-text';
+export { ClearButton } from './clear-button';
+export { AddressInput } from './address-input';
 export * from './modals';
+export * from './form';
+export * from './checkout';
 
 
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { RequiredSymbol } from '../required-symbol';
 import { Input } from '@/components/ui/input';
-import { ClearButton } from '../clear-button';
-import { ErrorText } from '../error-text';
+import { ClearButton, ErrorText } from '@/components/shared';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -42,7 +41,7 @@ export const FormInput: React.FC<Props> = ({ className, name, label, required, .
         {Boolean(text) && <ClearButton onClick={onClickClear} />}
       </div>
 
-      {errotText && <ErrorText text={errotText} />}
+      {errotText && <ErrorText text={errotText} className='mt-2'/>}
     </div>
   );
 };
