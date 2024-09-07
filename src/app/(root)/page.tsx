@@ -1,13 +1,15 @@
-'use client'
+//'use client'
 
 import {Container, Filters, ProductsGroupList, Title } from "@/components/shared";
 import { TopBar } from "@/components/shared/top-bar";
-import React from "react";
-import { useCategories} from '@/hooks';
+import React, { Suspense } from "react";
+import { findPizzas, GetSearchParams } from "@/lib/find-pizzas";
+import { Category } from "../../../models/product";
 
-export default function Home() {
-  const {categories, loading} = useCategories();
+export default async function Home({searchParams}: {searchParams: GetSearchParams}) {
   
+  const categories: Category[] = await findPizzas(searchParams);
+
   return <>
     <Container className="mt-10">
       <Title text="Все пиццы" size="lg" className="font-extrabold"/>      
@@ -17,9 +19,9 @@ export default function Home() {
 
     <Container className="mt-10 pb-14">
       <div className="flex gap-[60px]">
-        {/* Фильтрация */}
+       
         <div className="w-[250px]">
-          <Filters/>
+          <Suspense><Filters/></Suspense>
         </div>
         <div className="flex-1">
           <div className="flex flex-col gap-16">          

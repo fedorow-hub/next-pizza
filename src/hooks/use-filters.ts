@@ -54,7 +54,7 @@ export const useFilters = () : ReturnProps => {
     //Фильтр размеров
     const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>(searchParams.has('sizes') ? searchParams.get('sizes')?.split(',') : []));
     
-    return {
+    return React.useMemo(() => ({
         sizes,
         pizzaTypes,
         selectedIngredients,
@@ -63,5 +63,5 @@ export const useFilters = () : ReturnProps => {
         setPizzaTypes: togglePizzaTypes,
         setSizes: toggleSizes,
         setSelectedIngredients: toggleIngredients
-    }
+    }), [sizes, pizzaTypes, selectedIngredients, prices])
 }

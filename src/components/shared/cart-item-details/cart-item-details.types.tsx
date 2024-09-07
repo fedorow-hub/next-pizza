@@ -1,5 +1,3 @@
-import { ICartItem } from "@/store/cart";
-
 export interface CartItemProps {
   id: number;
   details: string;

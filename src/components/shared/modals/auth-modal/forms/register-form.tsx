@@ -46,8 +46,6 @@ export const RegisterForm: React.FC<Props> = ({ onClose, onClickLogin }) => {
     }
   };
 
-  //console.log(form.formState);
-
   return (
     <FormProvider {...form}>
       <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
