@@ -28,7 +28,7 @@ export const CheckoutCart: React.FC<Props> = ({loading, totalAmount, items, clas
                 }>
                 <div className="flex flex-col gap-5">
                 {loading
-                    ? [...Array(3)].map((_, index) => <CheckoutItemSkeleton key={index} />)
+                    ? [...Array(4)].map((_, index) => <CheckoutItemSkeleton key={index} />)
                     : items.map((item) => (
                         <CheckoutItem
                             id={item.id}
@@ -37,18 +37,19 @@ export const CheckoutCart: React.FC<Props> = ({loading, totalAmount, items, clas
                             imageUrl={item.imageUrl}
                             disabled={item.disabled} //TODO не работает
                             details={
-                                getCartItemsDetails(
-                                item.ingredients, 
-                                item.pizzaType as PizzaType, 
-                                item.size as PizzaSize)
-                                }
+                              getCartItemsDetails(
+                              item.ingredients, 
+                              item.pizzaType as PizzaType, 
+                              item.size as PizzaSize)
+                            }
                             price={item.price}
                             quantity={item.quantity}
                             onClickRemove={() => removeCartItem(item.id)}
                             onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)
                             }
                         />
-                        ))}
+                      ))
+                }
                 </div>
 
                 {!totalAmount && <p className="text-center text-gray-400 p-10">Корзина пустая</p>}

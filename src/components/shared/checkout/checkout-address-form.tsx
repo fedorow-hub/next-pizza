@@ -1,22 +1,26 @@
-import { FormTextarea, WhiteBlock } from '@/components/shared';
-import { Controller } from 'react-hook-form';
+import { AddressInput, ErrorText, FormTextarea, WhiteBlock } from '@/components/shared';
+import { Controller, useFormContext } from 'react-hook-form';
 
 interface Props{
-    totalAmount: number;
+    className?: string;
 }
 
-export const CheckoutAddressForm: React.FC<Props> = ({totalAmount }) => {
+export const CheckoutAddressForm: React.FC<Props> = ({className }) => {
+    const {control} = useFormContext();
     return(
         <WhiteBlock
-        className={!totalAmount ? 'opacity-50 pointer-events-none' : ''}
+        className={className}
         title="3. Адрес доставки"
         contentClassName="p-8">
         <div className="flex flex-col gap-5">
-          {/* <Controller
-            control={form.control}
+          <Controller
+            control={control}
             name="address"
-            render={({ field }) => <AddressInput onChange={field.onChange} />}
-          /> */}
+            render={({ field, fieldState }) => <>
+                <AddressInput onChange={field.onChange} />
+                {fieldState.error?.message && <ErrorText text={fieldState.error.message}/>}
+            </>}
+          />
 
           <FormTextarea
             name="comment"

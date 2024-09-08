@@ -4,7 +4,8 @@ import * as ingredients from './ingredients';
 import * as stories from './stories';
 //import * as auth from './auth';
 import * as categories from './categories';
-import * as product from './product'
+import * as product from './product';
+import * as order from './order';
 
 export const Api = {
   cart,
@@ -13,5 +14,6 @@ export const Api = {
   stories,
   //auth,
   categories,
-  product
+  product,
+  order
 };

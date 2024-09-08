@@ -13,9 +13,6 @@ interface Props {
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
-  items,
-  listClassName,
-  categoryId,
   className,
 }) => {
   

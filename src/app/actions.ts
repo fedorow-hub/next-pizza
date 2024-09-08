@@ -1,7 +1,7 @@
 'use server';
 
-//import { TFormOrderData } from '@/components/shared/schemas/order-form-shema';
-    /* const user = await prisma.user.findFirst({
+/* import { TFormOrderData } from '@/components/shared/schemas/order-form-shema';
+     const user = await prisma.user.findFirst({
       where: {
         email: body.email,
       },
@@ -39,16 +39,16 @@
     <p><a href="http://localhost:3000/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
     `;
 
-    await sendEmail(createdUser.email, 'Next Pizza / Подтверждение регистрации', html); */
-  /* } catch (error) {
+    await sendEmail(createdUser.email, 'Next Pizza / Подтверждение регистрации', html);
+  } catch (error) {
     console.log('Error [CREATE_USER]', error);
     throw error;
   }
 } */
 
-//export async function updateUserInfo(body: any /* Prisma.UserCreateInput */) {
-  //try {
-    /* const currentUser = await getUserSession();
+/* export async function updateUserInfo(body: any ) {
+  try {
+    const currentUser = await getUserSession();
 
     if (!currentUser) {
       throw new Error('Пользователь не найден');
@@ -63,21 +63,21 @@
         ...body,
         password: hashSync(body.password, 10),
       },
-    }); */
-  /* } catch (error) {
+    });
+  } catch (error) {
     console.log('Error [UPDATE_USER]', error);
     throw error;
   }
 } */
 
-/* export async function createOrder(data: TFormOrderData) {
-  try { */
-    /* const currentUser = await getUserSession();
+export async function createOrder(data: TFormOrderData) {
+  try {
+    const currentUser = await getUserSession();
     const userId = Number(currentUser?.id);
-    const userId = Number(3);
     const cookieStore = cookies();
     const cartToken = cookieStore.get('cartToken')?.value;
 
+    //находим корзину по userId или по токену
     const userCart = await prisma.cart.findFirst({
       include: {
         user: true,
@@ -104,14 +104,17 @@
       },
     });
 
+    //Если totalAmount 0 ничего не делаем
     if (!userCart?.totalAmount) {
       return;
     }
 
+    //если корзина не найдена возвращаем ошибку
     if (!userCart) {
       throw new Error('Cart not found');
     }
 
+    // создаем заказ
     const order = await prisma.order.create({
       data: {
         userId,
@@ -127,6 +130,7 @@
       },
     });
 
+    //обнуляет кол-во товаров в корзине
     await prisma.cart.update({
       where: {
         id: userCart.id,
@@ -136,6 +140,7 @@
       },
     });
 
+    //удаляет все cartItem из корзины
     await prisma.cartItem.deleteMany({
       where: {
         cartId: userCart.id,
@@ -165,16 +170,20 @@
       <p>Оплатите заказ на сумму ${order?.totalAmount}. Перейдите <a href="${paymentData.confirmation.confirmation_url}">по ссылке</a> для оплаты заказа.</p>
     `;
 
+    //re_cwb8f7nu_KkiY31WKtYvjNepxRevPJQjp (API Key)
+    // G#Hew2DN8NpU (Юкасса)
+    // test_CP532nflqaaOsKs41awJBi2WKVmE8svSGbKWzEWOmxg (тестовый API Key Юмани)
+
     if (userCart.user?.email) {
       await sendEmail(userCart.user?.email, `Next Pizza / Оплатите заказ #${order?.id}`, html);
     }
 
-    return paymentData.confirmation.confirmation_url; */
- /*  } catch (error) {
+    return paymentData.confirmation.confirmation_url;
+  } catch (error) {
     console.log('[CART_CHECKOUT_POST] Server error', error);
     throw error;
   }
-} */
+}
 
 /* Dashboard Actions */
 

@@ -10,6 +10,8 @@ import { CheckoutCart } from "@/components/shared";
 import { orderFormSchema, TFormOrderData } from "@/components/shared/checkout/checkout-form-schema";
 import React from "react";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import { createOrder } from "@/services/order";
 
 /* import { CartItem } from '@/components/shared/cart-item';
 import { CartSidebar } from '@/components/shared/cart-sidebar';
@@ -21,8 +23,6 @@ import { Title } from '@/components/shared/title';
 import { WhiteBlock } from '@/components/shared/white-block';
 import { useCart } from '@/hooks/use-cart';
 import { Trash2 } from 'lucide-react';
-import React from 'react';
-import toast from 'react-hot-toast';
 import { TFormOrderData, orderFormSchema } from '@/components/shared/schemas/order-form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput, FormTextarea } from '@/components/shared/form';
@@ -70,16 +70,13 @@ export default function CheckoutPage() {
     updateItemQuantity(id, value);
   };
 
- 
-
   const onSubmit = async (data: TFormOrderData) => {
-    console.log("onSubmit");
-    /* try {
+    try {
       setSubmitting(true);
 
       const url = await createOrder(data);
 
-      toast.error('Заказ успешно оформлен! 📝', {
+      toast.error('Заказ успешно оформлен! 📝 Переход на оплату...', {
         icon: '✅',
       });
 
@@ -87,12 +84,12 @@ export default function CheckoutPage() {
         location.href = url;
       }
     } catch (error) {
-      return toast.error('Неверный E-Mail или пароль', {
+      console.log(error);
+      setSubmitting(false);
+      return toast.error('Не удалось создать заказ', {
         icon: '❌',
       });
-    } finally {
-      setSubmitting(false);
-    } */
+    }
   };
 
   return (
@@ -111,15 +108,16 @@ export default function CheckoutPage() {
                     totalAmount={totalAmount}
                 />
 
-                <CheckoutPresonalForm totalAmount={totalAmount}/>
+                <CheckoutPresonalForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
 
-                <CheckoutAddressForm totalAmount={totalAmount}/>
+                <CheckoutAddressForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
 
             </div>
             <div className="w-[450px]">
               <CheckoutSidebar
                 totalAmount={totalAmount}
-                submitting={submitting}
+                //submitting={submitting}
+                loading={loading || submitting}
               />
             </div>
           </div>
