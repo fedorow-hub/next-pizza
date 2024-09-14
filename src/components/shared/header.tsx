@@ -22,21 +22,16 @@ interface Props {
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
   const searchParams = useSearchParams();
-
-  //TODO реализовать возврат после оплаты на url с параметром 'payd'
   
   React.useEffect(()=>{
-    if(searchParams.has('payd')){
+    if(searchParams.has('paid')){
       setTimeout(() => {
         toast.success('Заказ успешно оплачен! Информация отправлена на почту.');
       }, 500);      
     }
   }, []);
 
-  //TODO реализовать удаление параметра 'payd' сразу после его сработки
-
-
-  const onClickOpenAuthModal = () => setOpenAuthModal(true);
+  //TODO реализовать удаление параметра 'paid' сразу после его сработки
 
   return (
     <header className={cn('border-b border-gray-100', className)}>
@@ -58,9 +53,9 @@ export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart =
         )}
 
         <div className="flex items-center gap-3">
-          <AuthModal open={openAuthModal} onClose={onClickOpenAuthModal} />
+          <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
 
-          <ProfileButton onClickOpenModal={onClickOpenAuthModal} />
+          <ProfileButton onClickOpenModal={() => setOpenAuthModal(true)} />
 
           {hasCart && <CartButton />}
         </div>

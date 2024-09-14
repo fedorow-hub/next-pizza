@@ -24,6 +24,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 
   const onSubmit = async (data: TFormLoginData) => {
     try {
+      //TODO сделать обращение к бекенду
       /* const resp = await signIn('credentials', {
         ...data,
         redirect: false,
@@ -59,7 +60,8 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         <FormInput type="password" name="password" label="Пароль" required />
 
         <Button disabled={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-          {form.formState.isSubmitting ? 'Вход...' : 'Войти'}
+          {/* {form.formState.isSubmitting ? 'Вход...' : 'Войти'} */}
+          Войти
         </Button>
       </form>
     </FormProvider>

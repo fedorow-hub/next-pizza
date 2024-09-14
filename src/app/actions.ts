@@ -70,7 +70,7 @@
   }
 } */
 
-export async function createOrder(data: TFormOrderData) {
+/* export async function createOrder(data: TFormOrderData) {
   try {
     const currentUser = await getUserSession();
     const userId = Number(currentUser?.id);
@@ -138,10 +138,10 @@ export async function createOrder(data: TFormOrderData) {
       data: {
         totalAmount: 0,
       },
-    });
+    }); */
 
     //удаляет все cartItem из корзины
-    await prisma.cartItem.deleteMany({
+    /* await prisma.cartItem.deleteMany({
       where: {
         cartId: userCart.id,
       },
@@ -183,7 +183,7 @@ export async function createOrder(data: TFormOrderData) {
     console.log('[CART_CHECKOUT_POST] Server error', error);
     throw error;
   }
-}
+} */
 
 /* Dashboard Actions */
 

@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckoutCart } from "@/components/shared";
 import { orderFormSchema, TFormOrderData } from "@/components/shared/checkout/checkout-form-schema";
 import React from "react";
-import { useSession } from "next-auth/react";
+//import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { createOrder } from "@/services/order";
 
@@ -36,7 +36,7 @@ import { Api } from '@/services/api-client'; */
 export default function CheckoutPage() {
   const { totalAmount, items, loading, updateItemQuantity, removeCartItem } = useCart(true);
   const [submitting, setSubmitting] = React.useState(false);
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
 
   const form = useForm<TFormOrderData>({
     resolver: zodResolver(orderFormSchema),
