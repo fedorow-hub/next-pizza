@@ -4,22 +4,27 @@ import qs from "qs";
 import { useRouter } from 'next/navigation';
 
 export const useQueryFilters = (filters: Filters) => {
-    const router = useRouter();
-    React.useEffect(() => {     
-        const params = {
-          ...filters.prices,
-          ingredients: Array.from(filters.selectedIngredients),
-          sizes: Array.from(filters.sizes),
-          pizzaTypes: Array.from(filters.pizzaTypes) 
-        }
-        const query = qs.stringify(params, {
-          arrayFormat: 'comma',
-        });
+  const isMounted = React.useRef(false);
+  const router = useRouter();
+  React.useEffect(() => {    
+    if(isMounted.current){
+      const params = {
+        ...filters.prices,
+        ingredients: Array.from(filters.selectedIngredients),
+        sizes: Array.from(filters.sizes),
+        pizzaTypes: Array.from(filters.pizzaTypes) 
+      }
+      const query = qs.stringify(params, {
+        arrayFormat: 'comma',
+      });
+  
+  
+       router.push(`?${query}`, {
+        scroll: false
+      });
+    }      
     
-    
-        router.push(`?${query}`, {
-          scroll: false
-        });
-    
-      }, [filters]);
+    isMounted.current = true;
+  
+  }, [filters]);
 }

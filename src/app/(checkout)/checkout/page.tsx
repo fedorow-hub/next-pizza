@@ -3,7 +3,7 @@
 import { CheckoutSidebar, CheckoutPresonalForm, CheckoutAddressForm } from "@/components/shared";
 import { Container } from "@/components/shared/container";
 import { Title } from "@/components/shared/title";
-import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useCart } from "@/hooks";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckoutCart } from "@/components/shared";
@@ -72,7 +72,7 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: TFormOrderData) => {
     try {
-      setSubmitting(true);
+      setSubmitting(true);      
 
       const url = await createOrder(data);
 

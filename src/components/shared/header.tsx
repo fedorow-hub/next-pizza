@@ -10,10 +10,8 @@ import Link from 'next/link';
 import { CartButton } from './cart-button';
 import { AuthModal } from './modals/auth-modal';
 import { ProfileButton } from './profile-button';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { Button } from '../ui';
-import { User } from 'lucide-react';
 
 interface Props {
   hasSearch?: boolean;
@@ -24,28 +22,19 @@ interface Props {
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
   const searchParams = useSearchParams();
-  //const router = useRouter();
 
-  /* React.useEffect(() => {
-    let toastMessage = '';
-
-    if (searchParams.has('verified')) {
-      toastMessage = 'Почта успешно подтверждена!';
-    }
-
-    if (searchParams.has('paid')) {
-      toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.';
-    }
-
-    if (toastMessage) {
+  //TODO реализовать возврат после оплаты на url с параметром 'payd'
+  
+  React.useEffect(()=>{
+    if(searchParams.has('payd')){
       setTimeout(() => {
-        router.replace('/');
-        toast.success(toastMessage, {
-          duration: 3000,
-        });
-      }, 1000);
+        toast.success('Заказ успешно оплачен! Информация отправлена на почту.');
+      }, 500);      
     }
-  }, []); */
+  }, []);
+
+  //TODO реализовать удаление параметра 'payd' сразу после его сработки
+
 
   const onClickOpenAuthModal = () => setOpenAuthModal(true);
 
