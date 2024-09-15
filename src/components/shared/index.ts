@@ -27,6 +27,7 @@ export { CheckoutItemSkeleton } from './skeletons/checkout-item-skeleton';
 export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { AddressInput } from './address-input';
+export {InfoBlock} from './info-block';
 export * from './modals';
 export * from './form';
 export * from './checkout';

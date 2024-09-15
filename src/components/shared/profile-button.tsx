@@ -15,7 +15,7 @@ export const ProfileButton: React.FC<Props> = ({ className, onClickOpenModal }) 
 
   return (
     <div className={className}>
-      {false ? (
+      {true ? (
         <Link href="/profile">
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
