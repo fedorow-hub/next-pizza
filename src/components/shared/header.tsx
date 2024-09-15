@@ -12,6 +12,7 @@ import { AuthModal } from './modals/auth-modal';
 import { ProfileButton } from './profile-button';
 import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   hasSearch?: boolean;
@@ -20,18 +21,30 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
+  const router = useRouter();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
   const searchParams = useSearchParams();
   
   React.useEffect(()=>{
-    if(searchParams.has('paid')){
+    let toastMessage = '';
+
+    if(searchParams.has('paid')){      
+      toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.';
+    }
+
+    if(searchParams.has('verified')){
+      toastMessage = 'Почта успешно подтверждена!';
+    }
+
+    if(toastMessage){
       setTimeout(() => {
-        toast.success('Заказ успешно оплачен! Информация отправлена на почту.');
+        router.replace('/')
+        toast.success(toastMessage, {
+          duration: 3000
+        });
       }, 500);      
     }
   }, []);
-
-  //TODO реализовать удаление параметра 'paid' сразу после его сработки
 
   return (
     <header className={cn('border-b border-gray-100', className)}>
