@@ -1,3 +1,4 @@
+import { UserRole } from "@/components/shared/dashboard/forms/create-user-form/columns"
 
 export interface User
 {
@@ -6,6 +7,6 @@ export interface User
     fullName: string
     email: string
     password: string
-    Verified: string
-    role: string
+    //Verified: string
+    role: UserRole
 }

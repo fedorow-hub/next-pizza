@@ -1,9 +1,7 @@
 'use client'
 
-import { useProduct } from "@/hooks/use-product";
 import { ChoosePizzaForm } from "./choose-pizza-form";
 import { ChooseProductForm } from "./choose-product-form";
-import { useRouter } from 'next/navigation';
 import { Product } from "../../../models/product";
 
 interface Props {

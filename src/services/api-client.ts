@@ -6,6 +6,7 @@ import * as stories from './stories';
 import * as categories from './categories';
 import * as product from './product';
 import * as order from './order';
+import * as users from './user';
 
 export const Api = {
   cart,
@@ -15,5 +16,6 @@ export const Api = {
   //auth,
   categories,
   product,
-  order
+  order,
+  users
 };

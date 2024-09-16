@@ -8,4 +8,5 @@ export {Select} from './select';
 export {Skeleton} from './skeleton';
 export {Slider} from './slider';
 export {Textarea} from './textarea';
+export {Table} from './table';
 
