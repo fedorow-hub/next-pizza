@@ -1,41 +1,16 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
+import { User, UserRole } from "../../../../../../models/user"
+import DatatableRowActions from "./data-table-row-actions"
 
-import { Button } from "@/components/ui/button"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-export enum UserRole {
-  USER,
-  ADMIN
+interface ColumnProps{
+  onEdit: (value: User) => void;
+  onDelete: (value: User) => void;
 }
 
-export type User = {
-  id: number
-  fullName: string
-  email: string
-  login: string
-  role: UserRole
-  password: string
-}
 
-function onClickUpdate(id: number){
-  console.log(id)
-}
-
-function onClickDelete(id: number){
-  console.log(id)
-}
-
-export const columns: ColumnDef<User>[] = [
+export const getUserColumns = ({onEdit, onDelete} : ColumnProps): ColumnDef<User>[] => [
   {
     accessorKey: "id",
     header: "ID",
@@ -63,32 +38,6 @@ export const columns: ColumnDef<User>[] = [
   {
     header: "Действия",
     id: "actions",
-    cell: ({ row }) => {
-      const user = row.original
- 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={()=> onClickUpdate(user.id)}
-            >
-              Редактировать
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={()=> onClickDelete(user.id)}
-            >
-              Удалить
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
+    cell: ({ row }) => <DatatableRowActions row = {row} onEdit = {onEdit} onDelete = {onDelete} />   
   },
 ]

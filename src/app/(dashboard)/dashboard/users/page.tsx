@@ -1,10 +1,10 @@
 'use client';
 
 import { Container } from "@/components/shared/container";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { CreateUserForm } from "@/components/shared/dashboard/forms/create-user-form/create-user-form";
-import { DataTable } from "@/components/shared/data-table";
-import { columns } from "@/components/shared/dashboard/forms/create-user-form/columns";
+import { DataTable } from "@/components/shared/dashboard/forms/create-user-form/data-table";
+import { getUserColumns } from "@/components/shared/dashboard/forms/create-user-form/columns";
 import { Api } from "@/services/api-client";
 import { DashboardHeader } from "@/components/shared/dashboard/dashboard-header";
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -28,10 +28,18 @@ export default function AdminUserPage() {
     setOpen(true);
   };
 
+  const onDelete = useCallback(async (e: User) => {
+    const updatedUsers = await Api.users.removeUser(e.id);
+    setUsers(updatedUsers);
+  }, []);
+
+  const onEdit = useCallback((e: User) => onClickEdit(e), []);
+
   const onCloseModal = () => {
     setOpen(false);
-  };
-    
+  };    
+
+  const columns = useMemo(() => getUserColumns({onEdit, onDelete}), [])
 
   return (
     <>
@@ -42,10 +50,9 @@ export default function AdminUserPage() {
 
       <Dialog open={open} onOpenChange={onCloseModal}>
         <DialogContent className="p-6 bg-white overflow-hidden">
-          <CreateUserForm onClickAdd={onCloseModal}/>
+          <CreateUserForm values={selectedUser} onClickAdd={onCloseModal}/>
         </DialogContent>
       </Dialog>
     </>
-  );
-    
+  );    
 }

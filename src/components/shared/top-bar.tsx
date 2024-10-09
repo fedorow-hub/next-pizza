@@ -8,6 +8,13 @@ import { SortPopup } from './sort-popup';
 import { CartButton } from './cart-button';
 import { Category } from '../../../models/product';
 
+import userManager, {loadUser, signinRedirect, signoutRedirect} from './../../auth/user-service'
+import AuthProvider from "@/auth/auth-provider";
+import SignInOidc from './../../auth/SigninOidc';
+import { Route } from "react-router-dom";
+import SignoutOidc from "@/auth/SignoutOidc";
+import { Routes } from "react-router-dom";
+
 interface Props {  
   categories: Category[];
   className?: string;
@@ -15,6 +22,8 @@ interface Props {
 
 export const TopBar: React.FC<Props> = ({categories, className}) => {
   const [cartVisible, setCartVisible] = React.useState(false);
+
+  loadUser();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +44,20 @@ export const TopBar: React.FC<Props> = ({categories, className}) => {
   return (
     <div className={cn('sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10')}>
       <Container className="flex items-center justify-between ">
-        {/* <Categories items={categories} /> */}
         <Categories items={categories}/>
         <div className="flex items-center">
           <SortPopup />
+
+         {/*  <div>
+            <button onClick={() => signinRedirect()}>Login</button>
+            <AuthProvider userManager={userManager}>
+              <Routes>
+                <Route path="/signout-oidc" Component={SignoutOidc}/>
+                <Route path="/signin-oidc" Component={SignInOidc}/>
+              </Routes>
+            </AuthProvider>
+
+          </div> */}
           <CartButton
             className={cn(
               'transition-all',

@@ -13,14 +13,13 @@ export const createUser = async (user: User) => {
   return data;
 };
 
-export const updateUser = async (id: number, user: any) => {
-  const { data } = await axiosInstance.patch('/users/' + id,  user );
+export const updateUser = async (id: number, user: User) => {
+  const { data } = await axiosInstance.put('/users/' + id,  user );
 
   return data;
 };
 
 export const removeUser = async (id: number) => {
-  const { data } = await axiosInstance.delete('/carts/' + id);
-
+  const { data } = await axiosInstance.delete<User[]>('/users/' + id);
   return data;
 };

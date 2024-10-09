@@ -12,9 +12,8 @@ import { useRouter, useParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { DashboardFormHeader } from '../../dashboard-form-header';
 import { createUser, updateUser } from '@/services/user';
-import { UserRole } from './columns';
 import { FormSelect } from '@/components/shared/form/form-select';
-import { User } from '../../../../../../models/user';
+import { User, UserRole } from '../../../../../../models/user';
 
 interface Props {
   values?: User;
@@ -30,8 +29,9 @@ export const CreateUserForm: React.FC<Props> = ({ values, onClickAdd }) => {
     defaultValues: {
       fullName: values?.fullName || '',
       email: values?.email || '',
-      password: '',
-      role: values?.role.toString() || '',
+      login: values?.login || '',
+      password: values?.password || '',
+      role: values?.role?.toString() || '',
     },
     resolver: zodResolver(CreateUserFormSchema),
   });
@@ -42,11 +42,20 @@ export const CreateUserForm: React.FC<Props> = ({ values, onClickAdd }) => {
       const values2: User = {
         ...data,
         role: Number(data.role) as UserRole,
-        id: 0
+        id: values?.id || 0
       };
 
-      if (params.id) {
+     /*  if (params.id) {
+        debugger
         await updateUser(+params.id, values2);
+      } else {
+        debugger
+        await createUser(values2);
+        router.push('/dashboard/users');
+      } */
+
+      if (values2.id) {
+        await updateUser(values2.id, values2);
       } else {
         await createUser(values2);
         router.push('/dashboard/users');

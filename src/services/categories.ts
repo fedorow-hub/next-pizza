@@ -18,3 +18,24 @@ export const search = async (
   const { data } = await axiosInstance.get<Category[]>(ApiRoutes.CATEGORIES, {params});
   return data;
 };
+
+export const removeCategory = async (id: number) => {
+  const { data } = await axiosInstance.delete<Category[]>('/categories/' + id);
+  return data;
+};
+
+export const createCategory = async (category: Category) => {  
+  const { data } = await axiosInstance.post('/categories/', category );
+  return data;
+};
+
+export const updateCategory = async (id: number, category: Category) => {
+  debugger
+  const { data } = await axiosInstance.put('/categories/' + id,  category );  
+  return data;
+};
+
+export const getAllCategory = async () => {
+  const { data } = await axiosInstance.get<Category[]>('/categories/');
+  return data;
+};

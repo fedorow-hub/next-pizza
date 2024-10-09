@@ -17,7 +17,7 @@ export default async function Home({searchParams}: {searchParams: GetSearchParam
 
     </Container>
     <TopBar categories={categories.filter((category) => category.products?.length > 0)}/>
-
+    
     <Stories />
 
     <Container className="mt-10 pb-14">
