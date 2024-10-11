@@ -844,7 +844,7 @@ export interface CreateCartItemValues {
 }
 
 export interface Ingredient {
-    id?: number;
+    id: number;
     name?: string | undefined;
     price?: number;
     imageUrl?: string | undefined;

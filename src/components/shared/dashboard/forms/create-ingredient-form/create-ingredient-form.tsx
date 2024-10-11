@@ -16,20 +16,19 @@ import { DashboardFormHeader } from "../../dashboard-form-header";
   CreateProductFormSchema,
   CreateProductFormValues,
 } from "@/components/shared/dashboard/forms/create-product-form/constants"; */
-//import { Ingredient, Product } from "@prisma/client";
 import { Trash2 } from "lucide-react";
-//import { UploadButton } from "@/lib/uploadthing";
 import {
   CreateIngredientFormSchema,
   CreateIngredientFormValues,
 } from "@/components/shared/dashboard/forms/create-ingredient-form/constants";
+import { Ingredient } from "../../../../../../models/product";
 
 interface Props {
-  //values?: Ingredient;
-  values?: any;
+  values?: Ingredient;
+  onClickAdd: VoidFunction;
 }
 
-export const CreateIngredientForm: React.FC<Props> = ({ values }) => {
+export const CreateIngredientForm: React.FC<Props> = ({ values, onClickAdd }) => {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
@@ -44,6 +43,7 @@ export const CreateIngredientForm: React.FC<Props> = ({ values }) => {
   });
 
   const onSubmit: SubmitHandler<CreateIngredientFormValues> = async (data) => {
+    debugger
     try {
       setLoading(true);
 
@@ -66,6 +66,7 @@ export const CreateIngredientForm: React.FC<Props> = ({ values }) => {
     } finally {
       setLoading(false);
     }
+    onClickAdd?.();
   };
 
   const onUploadSuccess = (url: string) => {
@@ -110,11 +111,7 @@ export const CreateIngredientForm: React.FC<Props> = ({ values }) => {
             </div>
           ) : (
             <div>
-              {/* <UploadButton
-                endpoint="imageUploader"
-                onClientUploadComplete={(res: any) => onUploadSuccess(res[0].url)}
-                onUploadError={onUploadError}
-              /> */}
+              <input type="file" name="file"/>
               {form.formState.errors.imageUrl && (
                 <p className="text-red-500 text-sm mt-2">
                   {form.formState.errors.imageUrl.message}

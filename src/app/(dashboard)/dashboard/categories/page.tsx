@@ -13,7 +13,7 @@ import { Category } from "../../../../../models/product";
 export default function AdminCategoriePage() {
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [open, setOpen] = React.useState(false);
-  const [selectedCategory, setselectedCategory] = React.useState<Category>();
+  const [selectedCategory, setSelectedCategory] = React.useState<Category>();
 
   React.useEffect(() => {
     async function fetchCategories() {
@@ -24,7 +24,7 @@ export default function AdminCategoriePage() {
   }, [open]);
 
   const onClickEdit = (category?: Category) => {  
-    setselectedCategory(category);    
+    setSelectedCategory(category);    
     setOpen(true);
   };
 

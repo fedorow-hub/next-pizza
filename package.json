@@ -34,6 +34,7 @@
     "@types/lodash.debounce": "^4.0.9",
     "@types/qs": "^6.9.15",
     "@types/react-router-dom": "^5.3.3",
+    "@uploadthing/react": "^7.0.3",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
