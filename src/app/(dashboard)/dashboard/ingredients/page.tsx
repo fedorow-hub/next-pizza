@@ -5,8 +5,6 @@ import React, { useCallback, useMemo } from "react";
 import { Api } from "@/services/api-client";
 import { DashboardHeader } from "@/components/shared/dashboard/dashboard-header";
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { CreateCategoryForm } from "@/components/shared/dashboard/forms/create-category-form/create-category-form";
-import { getCategoryColumns } from "@/components/shared/dashboard/forms/create-category-form/columns";
 import { CreateIngredientForm } from "@/components/shared/dashboard/forms/create-ingredient-form/create-ingredient-form";
 import { DataTable } from "@/components/shared/dashboard/forms/create-ingredient-form/data-table";
 import { getIngredientColumns } from "@/components/shared/dashboard/forms/create-ingredient-form/columns";

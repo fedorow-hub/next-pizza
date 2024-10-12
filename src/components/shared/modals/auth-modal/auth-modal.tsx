@@ -5,7 +5,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { LoginForm } from './forms/login-forms';
 import { RegisterForm } from './forms/register-form';
 import { Button } from '@/components/ui/button';
-//import { signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 interface Props {
   open: boolean;
@@ -38,12 +38,12 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
         <div className="flex gap-2">
           <Button
             variant="secondary"
-            /* onClick={() =>
+            onClick={() =>
               signIn('github', {
                 callbackUrl: '/',
                 redirect: true,
               })
-            } */
+            }
             type="button"
             className="gap-2 h-12 p-2 flex-1">
             <img className="w-6 h-6" src="https://github.githubassets.com/favicons/favicon.svg" />
@@ -52,12 +52,12 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 
           <Button
             variant="secondary"
-            /* onClick={() =>
+            onClick={() =>
               signIn('google', {
                 callbackUrl: '/',
                 redirect: true,
               })
-            } */
+            }
             type="button"
             className="gap-2 h-12 p-2 flex-1">
             <img

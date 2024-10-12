@@ -6,22 +6,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FormInput } from "@/components/shared/form/form-input";
 import { useRouter, useParams } from "next/navigation";
-/* import {
-  createIngredient,
-  updateIngredient,
-} from "@/app/actions"; */
 import toast from "react-hot-toast";
 import { DashboardFormHeader } from "../../dashboard-form-header";
-/* import {
+import {
   CreateProductFormSchema,
   CreateProductFormValues,
-} from "@/components/shared/dashboard/forms/create-product-form/constants"; */
+} from "@/components/shared/dashboard/forms/create-product-form/constants";
 import { Trash2 } from "lucide-react";
 import {
   CreateIngredientFormSchema,
   CreateIngredientFormValues,
 } from "@/components/shared/dashboard/forms/create-ingredient-form/constants";
 import { Ingredient } from "../../../../../../models/product";
+import { UploadButton } from "@/lib/uploadthings";
 
 interface Props {
   values?: Ingredient;
@@ -43,7 +40,6 @@ export const CreateIngredientForm: React.FC<Props> = ({ values, onClickAdd }) =>
   });
 
   const onSubmit: SubmitHandler<CreateIngredientFormValues> = async (data) => {
-    debugger
     try {
       setLoading(true);
 
@@ -52,12 +48,12 @@ export const CreateIngredientForm: React.FC<Props> = ({ values, onClickAdd }) =>
         price: Number(data.price),
       };
 
-      /* if (params.id) {
-        await updateIngredient(+params.id, fields);
+      if (params.id) {
+        //await updateIngredient(+params.id, fields);
       } else {
-        await createIngredient(fields);
+        //await createIngredient(fields);
         router.push("/dashboard/ingredients");
-      } */
+      }
 
       console.log(data);
     } catch (error) {
@@ -111,7 +107,11 @@ export const CreateIngredientForm: React.FC<Props> = ({ values, onClickAdd }) =>
             </div>
           ) : (
             <div>
-              <input type="file" name="file"/>
+              <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={(res: any) => onUploadSuccess(res[0].url)}
+                onUploadError={onUploadError}
+              />
               {form.formState.errors.imageUrl && (
                 <p className="text-red-500 text-sm mt-2">
                   {form.formState.errors.imageUrl.message}

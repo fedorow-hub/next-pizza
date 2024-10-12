@@ -18,7 +18,7 @@ import {
 } from "@/components/shared/dashboard/forms/create-product-form/constants";
 //import { Product } from "@prisma/client";
 import { Trash2 } from "lucide-react";
-//import { UploadButton } from "@/lib/uploadthing";
+import { UploadButton } from "@/lib/uploadthings";
 
 interface Props {
   //values?: Product;
@@ -106,11 +106,11 @@ export const CreateProductForm: React.FC<Props> = ({ values }) => {
             </div>
           ) : (
             <div>
-              {/* <UploadButton
+              <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res: any) => onUploadSuccess(res[0].url)}
                 onUploadError={onUploadError}
-              /> */}
+              />
               {form.formState.errors.imageUrl && (
                 <p className="text-red-500 text-sm mt-2">
                   {form.formState.errors.imageUrl.message}

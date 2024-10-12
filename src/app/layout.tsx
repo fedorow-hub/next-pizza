@@ -2,6 +2,7 @@ import React from 'react';
 import './globals.css';
 import { Providers } from './providers';
 import { Nunito } from 'next/font/google';
+import "@uploadthing/react/styles.css";
 
 const nunito = Nunito({
   subsets: ['cyrillic'],

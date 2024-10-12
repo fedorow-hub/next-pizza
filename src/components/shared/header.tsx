@@ -13,6 +13,7 @@ import { ProfileButton } from './profile-button';
 import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   hasSearch?: boolean;
@@ -21,9 +22,12 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
+  const {data: session} = useSession();
   const router = useRouter();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
   const searchParams = useSearchParams();
+
+  console.log(session, 999);
   
   React.useEffect(()=>{
     let toastMessage = '';
