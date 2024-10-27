@@ -23,7 +23,7 @@ const DatatableRowActions = <TData,>({row, onEdit, onDelete} : DatatableRowActio
             <DropdownMenuItem className="text-primary-foreground cursor-pointer rounded-t-lg p-3 outline-none border-b-[1px] bg-primary hover:bg-primary/90"
               onClick={()=> onEdit(row.original)}
             >
-              Редактировать
+              Изменить роль
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-primary-foreground cursor-pointer rounded-b-lg p-3 outline-none border-b-[1px] bg-primary hover:bg-primary/90"

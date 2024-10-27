@@ -12,7 +12,7 @@ interface Props {
 export const DashboardFormHeader: React.FC<Props> = ({ isEdit, loading, className, text }) => {
   return (
     <div className={cn('flex justify-between items-center mb-7', className)}>
-      <h1 className="font-extrabold text-3xl">{isEdit ? `Редактирование ${text}` : `Создание ${text}`}</h1>
+      <h1 className="font-extrabold text-3xl">{isEdit ? `Изменение роли ${text}` : `Создание ${text}`}</h1>
       <Button loading={loading}>Сохранить</Button>
     </div>
   );

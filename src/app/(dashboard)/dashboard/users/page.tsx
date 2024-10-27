@@ -8,7 +8,9 @@ import { getUserColumns } from "@/components/shared/dashboard/forms/create-user-
 import { Api } from "@/services/api-client";
 import { DashboardHeader } from "@/components/shared/dashboard/dashboard-header";
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { User } from "../../../../../models/user";
+//import { User } from "../../../../../models/user";
+import { apiClient } from "@/services/instance";
+import { User } from "../../../../../api/api";
 
 export default function AdminUserPage() {
   const [users, setUsers] = React.useState<User[]>([]);
@@ -17,7 +19,8 @@ export default function AdminUserPage() {
 
   React.useEffect(() => {
     async function fetchUsers() {
-      const data = await Api.users.getAll();
+      /* const data = await Api.users.getAll(); */
+      const data : User[] = await apiClient.getAllUsers();
       setUsers(data);
     }
     fetchUsers();
@@ -29,7 +32,7 @@ export default function AdminUserPage() {
   };
 
   const onDelete = useCallback(async (e: User) => {
-    const updatedUsers = await Api.users.removeUser(e.id);
+    const updatedUsers = await apiClient.removeUser(e.id);
     setUsers(updatedUsers);
   }, []);
 
@@ -44,7 +47,7 @@ export default function AdminUserPage() {
   return (
     <>
       <Container className="mt-10 p-6 bg-white rounded-lg">
-        <DashboardHeader onClickEdit={onClickEdit} text={'Пользователи'}/>
+        <DashboardHeader addButton = {false} onClickEdit={onClickEdit} text={'Пользователи'}/>
         <DataTable columns={columns} data={users} />
       </Container>
 

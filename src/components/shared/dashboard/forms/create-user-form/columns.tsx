@@ -1,8 +1,9 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { User, UserRole } from "../../../../../../models/user"
+//import { User, UserRole } from "../../../../../../models/user"
 import DatatableRowActions from "./data-table-row-actions"
+import { User, UserRole } from "../../../../../../api/api";
 
 interface ColumnProps{
   onEdit: (value: User) => void;

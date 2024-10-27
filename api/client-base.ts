@@ -3,7 +3,7 @@ export class ClientBase {
         const token = localStorage.getItem('token');
         options.headers = {
             ...options.headers,
-            Authorization: 'Bearer' + token
+            Authorization: 'Bearer ' + token
         };
         return Promise.resolve(options);
     } 

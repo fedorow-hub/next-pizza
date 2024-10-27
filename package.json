@@ -2,6 +2,7 @@
   "name": "next-pizza",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -45,7 +46,7 @@
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "nextjs-toploader": "^1.6.11",
-    "oidc-client": "^1.11.5",
+    "oidc-client-ts": "^3.1.0",
     "prisma": "^5.17.0",
     "prisma-extension-pagination": "^0.6.0",
     "qs": "^6.13.0",

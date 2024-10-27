@@ -1,9 +1,10 @@
+'use client'
+
 import React from 'react';
 import { Button } from '../ui/button';
 import { CircleUser } from 'lucide-react';
 import Link from 'next/link';
 import { User } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 
 interface Props {
   onClickOpenModal?: VoidFunction;
@@ -11,16 +12,18 @@ interface Props {
 }
 
 export const ProfileButton: React.FC<Props> = ({ className, onClickOpenModal }) => {
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
+  
 
   return (
     <div className={className}>
-      {session ? (
+
+      {false ? (
         <Link href="/profile">
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
             Профиль
-          </Button>
+          </Button>          
         </Link>
       ) : (
         <Button onClick={onClickOpenModal} variant="outline">
@@ -31,3 +34,5 @@ export const ProfileButton: React.FC<Props> = ({ className, onClickOpenModal }) 
     </div>
   );
 };
+
+

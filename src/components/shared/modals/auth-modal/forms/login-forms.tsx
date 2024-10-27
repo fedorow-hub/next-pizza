@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { FormInput } from '@/components/shared/form';
 //import { signIn } from 'next-auth/react';
 import { revalidatePath } from 'next/cache';
+import { signinRedirect } from '@/auth/user-service';
 
 interface Props {
   onClose?: VoidFunction;
@@ -22,10 +23,10 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
     },
   });
 
-  const onSubmit = async (data: TFormLoginData) => {
+  /* const onSubmit = async (data: TFormLoginData) => {
     try {
       //TODO сделать обращение к бекенду
-      /* const resp = await signIn('credentials', {
+      const resp = await signIn('credentials', {
         ...data,
         redirect: false,
       });
@@ -34,7 +35,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         return toast.error('Неверный E-Mail или пароль', {
           icon: '❌',
         });
-      } */
+      }
 
       onClose?.();
     } catch (error) {
@@ -43,10 +44,19 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         icon: '❌',
       });
     }
-  };
+  }; */
 
   return (
-    <FormProvider {...form}>
+    <Button
+      onClick={() => signinRedirect()}
+      type="button"
+      className="h-12 text-base">
+        Войти
+    </Button>  
+  );
+};
+
+ {/* <FormProvider {...form}>
       <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex justify-between items-center">
           <div className="mr-2">
@@ -60,10 +70,8 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         <FormInput type="password" name="password" label="Пароль" required />
 
         <Button disabled={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-          {/* {form.formState.isSubmitting ? 'Вход...' : 'Войти'} */}
+          
           Войти
         </Button>
       </form>
-    </FormProvider>
-  );
-};
+    </FormProvider> */}

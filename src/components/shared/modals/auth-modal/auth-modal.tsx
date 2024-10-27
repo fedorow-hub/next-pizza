@@ -6,6 +6,7 @@ import { LoginForm } from './forms/login-forms';
 import { RegisterForm } from './forms/register-form';
 import { Button } from '@/components/ui/button';
 import { signIn } from 'next-auth/react';
+import { signinRedirect } from '@/auth/user-service';
 
 interface Props {
   open: boolean;
@@ -36,6 +37,16 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
         <hr />
 
         <div className="flex gap-2">
+          {/* <Button
+            variant="secondary"
+            onClick={() => signinRedirect()}
+            type="button"
+            className="gap-2 h-12 p-2 flex-1">
+            <img className="w-6 h-6" src="https://github.githubassets.com/favicons/favicon.svg" />
+            Login
+          </Button> */}
+
+
           <Button
             variant="secondary"
             onClick={() =>
@@ -68,9 +79,9 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
           </Button>
         </div>
 
-        <Button variant="outline" onClick={onSwitchType} type="button" className="h-12">
+        {/* <Button variant="outline" onClick={onSwitchType} type="button" className="h-12">
           {type !== 'login' ? 'Войти' : 'Регистрация'}
-        </Button>
+        </Button> */}
       </DialogContent>
     </Dialog>
   );

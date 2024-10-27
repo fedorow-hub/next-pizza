@@ -1,20 +1,24 @@
 'use client';
 
-import {useNavigate} from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { FC, useEffect } from "react";
 import { signinRedirectCallback } from './user-service';
 
+//компонент предназначен для отображения страницы перенаправления после логина
 const SigninOidc: FC<{}> = () => {
-    const history = useNavigate();
+    const router = useRouter();
     useEffect(()=> {
-        async function signinAsync() {
+        async function signin() {
             await signinRedirectCallback();
-            history('/')
+            router.push('/');
         }
-        signinAsync();
-    }, [history])
+        if (typeof window !== 'undefined') {            
+            signin();
+        }        
+    }, [router])
     return <div>Redirecting...</div>
 }
 
 export default SigninOidc;
+

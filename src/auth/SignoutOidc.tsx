@@ -1,19 +1,20 @@
 'use client';
 
-import {useNavigate} from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { FC, useEffect } from "react";
 import { signoutRedirectCallback } from './user-service';
 
+//компонент предназначен для отображения страницы перенаправления после вылогинивания
 const SignoutOidc: FC<{}> = () => {
-    const history = useNavigate();
+    const router = useRouter();
     useEffect(()=> {
-        async function signoutAsync() {
+        async function signout() {
             await signoutRedirectCallback();
-            history('/')
+            router.push('/');
         }
-        signoutAsync();
-    }, [history]);
+        signout();
+    }, [router]);
     return <div>Redirecting...</div>
 }
 

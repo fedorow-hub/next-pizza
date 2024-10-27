@@ -14,12 +14,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 //import { User } from '@prisma/client';
-import { signOut } from 'next-auth/react';
+//import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { User } from '../../../api/api';
+import { signoutRedirect } from '@/auth/user-service';
 
 interface Props {
-  //data: User;
-  data: any;
+  data: User;
 }
 
 export const ProfileForm: React.FC<Props> = ({ data }) => {
@@ -51,30 +52,27 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
     }
   };
 
-  const onClickSignOut = () => {
+ /*  const onClickSignOut = () => {
     signOut({
       callbackUrl: '/',
     });
-  };
+  }; */
 
   return (
     <Container className="my-10">
       <Title text="Личные данные" size="md" className="font-bold" />
 
       <FormProvider {...form}>
-        <form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-5 w-96 mt-10" /* onSubmit={form.handleSubmit(onSubmit)} */>
           <FormInput name="email" label="E-Mail" required />
           <FormInput name="fullName" label="Полное имя" required />
-
-          <FormInput type="password" name="password" label="Новый пароль" required />
-          <FormInput type="password" name="confirmPassword" label="Повторите пароль" required />
 
           <Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
             Сохранить
           </Button>
 
           <Button
-            onClick={onClickSignOut}
+            onClick={() => signoutRedirect()}
             variant="secondary"
             disabled={form.formState.isSubmitting}
             className="text-base"

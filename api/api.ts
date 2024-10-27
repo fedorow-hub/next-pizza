@@ -17,9 +17,14 @@ export class Client extends ClientBase {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         super();
-        this.http = http ? http : window as any;
+        if (typeof window !== "undefined") {
+            this.http = http ? http : window as any;
+        } else {            
+            this.http = http ? http : { fetch: async () => new Response() }; // Or provide an alternative for Node.js, such as Node-fetch or Axios.
+        }
         this.baseUrl = baseUrl ?? "";
     }
+    
 
     /**
      * @return Created
@@ -222,6 +227,95 @@ export class Client extends ClientBase {
         }
         return Promise.resolve<User[]>(null as any);
     }
+
+       /**
+     * @return No Content
+     */
+    updateUser(id: number, user: UserVM): Promise<User[]> {
+        let url_ = this.baseUrl + "/users/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(user);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processUpdateUser(_response);
+        });
+    }
+
+    protected processUpdateUser(response: Response): Promise<User[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as User[];
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<User[]>(null as any);
+    }
+
+    
+    /**
+     * @return OK
+     */
+    removeUser(id: number): Promise<User[]> {
+        let url_ = this.baseUrl + "/users/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processDeleteUser(_response);
+        });
+    }
+
+    protected processDeleteUser(response: Response): Promise<User[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as User[];
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<User[]>(null as any);
+    }
+
+    
 
     /**
      * @return OK
@@ -646,7 +740,7 @@ export class Client extends ClientBase {
     /**
      * @return OK
      */
-    login(): Promise<void> {
+   /*  login(): Promise<void> {
         let url_ = this.baseUrl + "/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -676,7 +770,7 @@ export class Client extends ClientBase {
             });
         }
         return Promise.resolve<void>(null as any);
-    }
+    } */
 
     /**
      * @return OK
@@ -952,7 +1046,7 @@ export interface StoryItem {
 }
 
 export interface User {
-    id?: number;
+    id: number;
     fullName?: string | undefined;
     email?: string | undefined;
     login?: string | undefined;
@@ -970,8 +1064,8 @@ export interface User {
 }
 
 export enum UserRole {
-    _0 = 0,
-    _1 = 1,
+    "Пользователь" = 0,
+    "Администратор" = 1,
 }
 
 export interface UserVM {

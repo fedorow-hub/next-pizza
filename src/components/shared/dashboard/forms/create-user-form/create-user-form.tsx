@@ -11,9 +11,11 @@ import { useRouter, useParams } from 'next/navigation';
 //import { createUser, updateUser } from '@/app/actions';
 import toast from 'react-hot-toast';
 import { DashboardFormHeader } from '../../dashboard-form-header';
-import { createUser, updateUser } from '@/services/user';
+//import { createUser, updateUser } from '@/services/user';
 import { FormSelect } from '@/components/shared/form/form-select';
-import { User, UserRole } from '../../../../../../models/user';
+import { User, UserRole } from '../../../../../../api/api';
+import { apiClient } from '@/services/instance';
+//import { User, UserRole } from '../../../../../../models/user';
 
 interface Props {
   values?: User;
@@ -55,9 +57,9 @@ export const CreateUserForm: React.FC<Props> = ({ values, onClickAdd }) => {
       } */
 
       if (values2.id) {
-        await updateUser(values2.id, values2);
+        await apiClient.updateUser(values2.id, values2);
       } else {
-        await createUser(values2);
+        await apiClient.createUser(values2);
         router.push('/dashboard/users');
       }
 
@@ -74,11 +76,11 @@ export const CreateUserForm: React.FC<Props> = ({ values, onClickAdd }) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <DashboardFormHeader text={'пользователя'} isEdit={!!values} loading={loading} />
+        <DashboardFormHeader text={'пользователя'} isEdit={!!values?.fullName} loading={loading} />
         <div className="border shadow-sm rounded-lg grid grid-cols-2 gap-5 p-5">
-          <FormInput name="fullName" label="ФИО" required />
+          {/* <FormInput name="fullName" label="ФИО" required />
           <FormInput name="email" label="E-Mail" required />
-          <FormInput name="login" label="Логин" required />
+          <FormInput name="login" label="Логин" required /> */}
           <FormSelect
             name="role"
             label="Роль"
@@ -94,7 +96,7 @@ export const CreateUserForm: React.FC<Props> = ({ values, onClickAdd }) => {
               },
             ]}
           />
-          <FormInput name="password" label="Пароль" required />
+          {/* <FormInput name="password" label="Пароль" required /> */}
         </div>
       </form>
     </FormProvider>
